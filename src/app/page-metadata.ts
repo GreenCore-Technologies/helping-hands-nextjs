@@ -5,7 +5,7 @@ const SITE_NAME =
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://helpinghandsei.com";
+  "https://helping-handsllc.com";
 
 interface PageSEOOptions {
   title: string;

@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://helpinghandsei.com";
+    "https://helping-handsllc.com";
 
   const routes = [
     "",
@@ -20,16 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency:
-      route === ""
-        ? "weekly"
-        : "monthly",
-    priority:
-      route === ""
-        ? 1
-        : route === "/services" ||
-            route === "/referral"
-          ? 0.9
-          : 0.8,
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1 : 0.8,
   }));
 }

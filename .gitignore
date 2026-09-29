@@ -1,41 +1,158 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ==========================================
+# HELPING HANDS NEXT.JS
+# Git Ignore Configuration
+# ==========================================
 
-# dependencies
+
+# ==========================================
+# Dependencies
+# ==========================================
+
 /node_modules
 /.pnp
 .pnp.*
+
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
 
-# testing
+
+# ==========================================
+# Testing
+# ==========================================
+
 /coverage
 
-# next.js
+
+# ==========================================
+# Next.js
+# ==========================================
+
 /.next/
 /out/
 
-# production
+
+# ==========================================
+# Production Build
+# ==========================================
+
 /build
 
-# misc
-.DS_Store
-*.pem
 
-# debug
+# ==========================================
+# Environment Variables / Secrets
+# ==========================================
+
+.env
+.env.*
+!.env.example
+
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+
+# ==========================================
+# Private Keys / Certificates
+# ==========================================
+
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+
+# ==========================================
+# Local Secret Files
+# ==========================================
+
+secrets/
+.secret
+*.secret
+
+
+# ==========================================
+# Database Dumps / Backups
+#
+# IMPORTANT:
+# Do NOT globally ignore *.sql.
+# Drizzle migration SQL files must be
+# committed to source control.
+# ==========================================
+
+*.dump
+*.backup
+/database-backups/
+
+
+# ==========================================
+# Vercel
+# ==========================================
+
+.vercel
+
+
+# ==========================================
+# TypeScript
+# ==========================================
+
+*.tsbuildinfo
+next-env.d.ts
+
+
+# ==========================================
+# Debug Logs
+# ==========================================
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
 
-# vercel
-.vercel
+# ==========================================
+# macOS
+# ==========================================
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+.DS_Store
+
+
+# ==========================================
+# Editor / IDE Files
+# ==========================================
+
+.vscode/
+.idea/
+
+*.swp
+*.swo
+
+
+# ==========================================
+# Temporary Files
+# ==========================================
+
+*.tmp
+*.temp
+*.log
+
+
+# ==========================================
+# Local Backups
+# ==========================================
+
+*.bak
+*.old
+
+
+# ==========================================
+# OS Generated Files
+# ==========================================
+
+Thumbs.db
+Desktop.ini

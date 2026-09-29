@@ -1,0 +1,31 @@
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Admin Portal",
+    template: "%s | Helping Hands Admin",
+  },
+
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
+};
+
+interface AdminRootLayoutProps {
+  children: ReactNode;
+}
+
+export default function AdminRootLayout({
+  children,
+}: AdminRootLayoutProps) {
+  return children;
+}

@@ -80,7 +80,7 @@ export function SiteLayout({
           >
             <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-white shadow-sm ring-1 ring-primary/10 transition-colors group-hover:ring-primary/30">
               <img
-                src="/helping-hands-mark.png"
+                src="/helping-hands-logo.png"
                 alt=""
                 aria-hidden="true"
                 className="h-full w-full object-cover"
@@ -236,8 +236,8 @@ export function SiteLayout({
           <div>
             <div className="mb-6 flex items-center gap-3">
               <img
-                src="/helping-hands-mark.png"
-                alt=""
+                src="/helping-hands-logo.png"
+                alt="Helping Hands Logo"
                 aria-hidden="true"
                 className="h-12 w-12 rounded-full bg-white object-cover"
               />

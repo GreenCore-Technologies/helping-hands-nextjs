@@ -1,19 +1,26 @@
+
 import { NextRequest } from "next/server";
 
-/*
- * Determine which origins are permitted to send
- * state-changing requests to this application.
+/**
+ * Helping Hands LLC
+ * Request Origin Security
  *
- * Production:
- *   https://helping-handsllc.com
+ * Production domains:
+ * https://www.helpinghands-llc.com
+ * https://helpinghands-llc.com
  *
  * Development:
- *   localhost and local network access.
+ * localhost and local network addresses.
  */
+
+const ALLOWED_PRODUCTION_ORIGINS = new Set([
+  "https://www.helpinghands-llc.com",
+  "https://helpinghands-llc.com",
+]);
 
 function normalizeOrigin(
   value: string,
-) {
+): string | null {
   try {
     return new URL(value).origin;
   } catch {
@@ -21,24 +28,10 @@ function normalizeOrigin(
   }
 }
 
-function getProductionOrigin() {
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL;
-
-  if (!siteUrl) {
-    return null;
-  }
-
-  return normalizeOrigin(siteUrl);
-}
-
 function isDevelopmentOrigin(
   origin: string,
-) {
-  if (
-    process.env.NODE_ENV ===
-    "production"
-  ) {
+): boolean {
+  if (process.env.NODE_ENV === "production") {
     return false;
   }
 
@@ -48,12 +41,10 @@ function isDevelopmentOrigin(
     return (
       url.hostname === "localhost" ||
       url.hostname === "127.0.0.1" ||
-      url.hostname === "::1" ||
+      url.hostname === "[::1]" ||
       url.hostname.endsWith(".local") ||
       /^10\./.test(url.hostname) ||
-      /^192\.168\./.test(
-        url.hostname,
-      ) ||
+      /^192\.168\./.test(url.hostname) ||
       /^172\.(1[6-9]|2\d|3[01])\./.test(
         url.hostname,
       )
@@ -65,46 +56,34 @@ function isDevelopmentOrigin(
 
 export function isAllowedOrigin(
   request: NextRequest,
-) {
-  const origin =
-    request.headers.get("origin");
+): boolean {
+  const origin = request.headers.get("origin");
 
-  /*
-   * Browser form/fetch requests that mutate
-   * application state should contain Origin.
-   *
-   * Reject requests where it is absent rather
-   * than silently trusting them.
-   */
+  // Reject requests without an Origin header.
   if (!origin) {
     return false;
   }
 
-  const normalizedOrigin =
-    normalizeOrigin(origin);
+  const normalizedOrigin = normalizeOrigin(origin);
 
   if (!normalizedOrigin) {
     return false;
   }
 
-  const productionOrigin =
-    getProductionOrigin();
-
+  // Allow the official Helping Hands domains.
   if (
-    productionOrigin &&
-    normalizedOrigin ===
-      productionOrigin
-  ) {
-    return true;
-  }
-
-  if (
-    isDevelopmentOrigin(
+    ALLOWED_PRODUCTION_ORIGINS.has(
       normalizedOrigin,
     )
   ) {
     return true;
   }
 
+  // Allow local development only outside production.
+  if (isDevelopmentOrigin(normalizedOrigin)) {
+    return true;
+  }
+
+  // Reject all other origins.
   return false;
 }

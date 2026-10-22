@@ -14,7 +14,6 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import { SiteLayout } from "@/components/site-layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -98,8 +97,7 @@ const sessionPhotos = [
 
 export default function HomePage() {
   return (
-    <SiteLayout>
-      <main id="main-content">
+    <>
         {/* Hero */}
         <section className="relative overflow-hidden bg-muted py-20 lg:py-32">
           <div className="absolute inset-0">
@@ -391,7 +389,6 @@ export default function HomePage() {
             </motion.div>
           </div>
         </section>
-      </main>
-    </SiteLayout>
+    </>
   );
 }
